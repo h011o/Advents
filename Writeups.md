@@ -245,8 +245,10 @@ Flag 2 : `1984000`
 ## My Solve
 
 
-``pdfcrack -f flag.pdf -w /usr/share/wordlists/rockyou.txt``  password: `naughtylist`
-``zip2john flag.zip > ziphash.txt ``  password : `winter4ever`
+1. ``pdfcrack -f flag.pdf -w /usr/share/wordlists/rockyou.txt``
+*  password: `naughtylist`
+2. ``zip2john flag.zip > ziphash.txt ``
+*  password : `winter4ever`
 
 Flag 1 : `THM{Cr4ck1ng_PDFs_1s_34$y}`
 
