@@ -240,6 +240,15 @@ Flag 2 : `1984000`
 
 ***
 
-# Day 3
+# Day 9 : Passwords - A Cracking Christmas
 
 ## My Solve
+
+
+``pdfcrack -f flag.pdf -w /usr/share/wordlists/rockyou.txt``  password: `naughtylist`
+``zip2john flag.zip > ziphash.txt ``  password : `winter4ever`
+
+Flag 1 : `THM{Cr4ck1ng_PDFs_1s_34$y}`
+
+Flag 2: `THM{Cr4ck1n6_z1p$_1s_34$yyyy}`
+
