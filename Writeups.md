@@ -1,6 +1,6 @@
 # Day 1
 
-# My Solve
+## My Solve
 
 ```
 mcskidy@tbfc-web01:~$ cd Guides
@@ -109,7 +109,7 @@ and I left only enough to get help.
 
 # Day 2
 
-# My Solve
+## My Solve
 
 ```
            ,..-,
