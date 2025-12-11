@@ -1,4 +1,4 @@
-# Day 1 - Linux CLI Shell Basics
+<img width="281" height="85" alt="image" src="https://github.com/user-attachments/assets/8f1d7cd2-31d4-4ee3-9a1b-05e8aaeee596" /># Day 1 - Linux CLI Shell Basics
 
 ## My Solve
 
@@ -269,10 +269,83 @@ Answers:
 
 
 
-
-
-
 ***
+# Day 6 : Malware Analysis
+
+## My Solve
+
+> Checksums are used within cyber security to track and catalogue files and executables. 
+  
+SHA256Sum: `file > sha256,F29C270068F865EF4A747E2683BFA07667BF64E768B38FBB9A2750A3D879CA33`
+
+<img width="281" height="85" alt="image" src="https://github.com/user-attachments/assets/64a45473-df33-4c5e-8ce1-1a41d2126654" />
+
+Flag: `THM{STRINGS_FOUND}`
+
+> Regshot is a widely used utility, especially when analysing malware on Windows. It works by creating two "snapshots" of the registry—one before the malware is run and another afterwards. The results are then compared to identify any changes.
+
+Registry modified by HopHelper.exe: `HKU\S-1-5-21-1966530601-3185510712-10604624-1008\Software\Microsoft\Windows\CurrentVersion\Run\HopHelper: "C:\Users\DFIRUser\Desktop\HopHelper\HopHelper.exe`
+
+
+
+# Day 7 : Network Security
+
+## My Solve
+
+```
+
+root@ip-10-48-169-77:~# ftp 10.48.133.55 21212
+Connected to 10.48.133.55.
+220 (vsFTPd 3.0.5)
+Name (10.48.133.55:root): anonymous
+230 Login successful.
+Remote system type is UNIX.
+Using binary mode to transfer files.
+ftp> ls
+200 PORT command successful. Consider using PASV.
+150 Here comes the directory listing.
+-rw-r--r--    1 ftp      ftp            13 Oct 22 16:27 tbfc_qa_key1
+226 Directory send OK.
+ftp> get tbfc_qa_key1
+local: tbfc_qa_key1 remote: tbfc_qa_key1
+200 PORT command successful. Consider using PASV.
+150 Opening BINARY mode data connection for tbfc_qa_key1 (13 bytes).
+226 Transfer complete.
+13 bytes received in 0.00 secs (32.8044 kB/s)
+ftp> get tbfc_qa_key1 -
+remote: tbfc_qa_key1
+200 PORT command successful. Consider using PASV.
+150 Opening BINARY mode data connection for tbfc_qa_key1 (13 bytes).
+KEY1:3aster_
+226 Transfer complete.
+13 bytes received in 0.00 secs (288.5298 kB/s)
+```
+Key1: 3aster_
+
+```
+oot@ip-10-48-169-77:~# nc -v 10.48.133.55 25251
+Connection to 10.48.133.55 25251 port [tcp/*] succeeded!
+TBFC maintd v0.2
+Type HELP for commands.
+HELP
+Commands: HELP, STATUS, GET KEY, QUIT
+STATUS
+status: armed_for=39s, port=25251
+GET KEY
+KEY2:15_th3_
+```
+Key2: 15_th3_
+
+```
+ root@ip-10-48-169-77:~#  dig @10.48.133.55 TXT key3.tbfc.local +short
+"KEY3:n3w_xm45"
+```
+
+Key3: n3w_xm45
+
+
+Flag: ` THM{4ll_s3rvice5_d1sc0vered}`
+
 
 # Day 8 : Prompt Injection
 
