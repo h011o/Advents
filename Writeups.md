@@ -1,4 +1,4 @@
-<img width="281" height="85" alt="image" src="https://github.com/user-attachments/assets/8f1d7cd2-31d4-4ee3-9a1b-05e8aaeee596" /># Day 1 - Linux CLI Shell Basics
+# Day 1 - Linux CLI Shell Basics
 
 ## My Solve
 
