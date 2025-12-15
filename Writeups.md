@@ -387,7 +387,7 @@ Flag 1 : `THM{Evil_Bunny}`
 
 Flag 2: `THM{Evil_Stored_Egg}`
 
-# Concepts Learned
+**Concepts Learned:**
 
 1. Reflected XSS: Attacker targets individuals by tricking them into clicking a link with malicious code.
 2. Stored XSS: Attacker stores malicious script in the server which is then loaded for every user who views the page. 
