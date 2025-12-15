@@ -374,3 +374,20 @@ Flag 1 : `THM{Cr4ck1ng_PDFs_1s_34$y}`
 
 Flag 2: `THM{Cr4ck1n6_z1p$_1s_34$yyyy}`
 
+***
+# Day 11 : XSS Vulnerabilites
+
+# My Solve
+
+`<script>alert('Reflected Meow Meow')</script>`
+Output : <img width="754" height="310" alt="image" src="https://github.com/user-attachments/assets/f228350a-8cb6-4669-8c50-1ae7a7112adf" />
+
+Flag 1 : `THM{Evil_Bunny}`
+
+Flag 2: `THM{Evil_Stored_Egg}`
+
+# Concepts Learned
+
+1. Reflected XSS: Attacker targets individuals by tricking them into clicking a link with malicious code.
+2. Stored XSS: Attacker stores malicious script in the server which is then loaded for every user who views the page. 
+
