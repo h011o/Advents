@@ -380,6 +380,7 @@ Flag 2: `THM{Cr4ck1n6_z1p$_1s_34$yyyy}`
 # My Solve
 
 `<script>alert('Reflected Meow Meow')</script>`
+
 Output : <img width="754" height="310" alt="image" src="https://github.com/user-attachments/assets/f228350a-8cb6-4669-8c50-1ae7a7112adf" />
 
 Flag 1 : `THM{Evil_Bunny}`
@@ -390,4 +391,18 @@ Flag 2: `THM{Evil_Stored_Egg}`
 
 1. Reflected XSS: Attacker targets individuals by tricking them into clicking a link with malicious code.
 2. Stored XSS: Attacker stores malicious script in the server which is then loaded for every user who views the page. 
+
+***
+# Day 14: Web Attack Forensics
+
+> Here we use splunk again (from Day 3) for our solve.
+
+**Concepts Learned:**
+
+* Apache is the most widely used web server software. Developed and maintained by Apache Software Foundation, Apache is an open source software available for free.
+* Attacker has used Apache to spawn system processes like `cmd.exe` and `powershell.exe`
+* Attacker then uses command `whoami` to identify victim.
+* Poweshell payloads can be encoded using base64
+
+***
 
