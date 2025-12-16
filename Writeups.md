@@ -281,9 +281,12 @@ Answers:
 
 Opened up burpsuite for this one and sent the `view-account` request to repeater. Child with the required birthdate was found on ID `19` 
 
+
 <img width="1072" height="590" alt="image" src="https://github.com/user-attachments/assets/5dc66a48-efa3-42a3-958e-144b3a01a37b" />
 
-I also learned how to craft a payload for the GET Api `/api/child/b64/Mw== ` using Intruder and base64 encoding to automate this process.
+
+
+I also learned the alternate method which was to craft a payload for the GET Api `/api/child/b64/Mw== ` using Intruder and base64 encoding to automate this process.
 
 
 ***
