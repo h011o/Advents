@@ -18,20 +18,66 @@ Flag : `csd{Elf67_snowball}`
 
 ***
 
-## Syndiware
+## Kramazon
 
 > Description
+Investigate Kramazon’s ordering workflow. If you can exploit this flaw to obtain Santa Priority Delivery for your order, Kramazon will reveal its restricted Priority Route Manifest, which contains the flag.
 
-The Krampus Syndicate has never been subtle, but their newest initiative, codenamed Syndiware, might be their boldest misstep yet. Designed as a "consumer-friendly malware suite," Syndiware appears to target the youngest and most gullible users on the network: interns, seasonal hires, and anyone who believes free virtual currency generators are safe to run.
+Good luck, Operative.
 
-One such recruit learned this the hard way. Minutes after launching a suspicious executable, his entire workstation transformed into a theater of chaos: missing files, corrupted data structures, and a ransom note full of melodramatic threats. The intern claims he only clicked "Run Anyway" once. (The security logs suggest otherwise.)
-
-What the Syndicate didn't expect is that this early build of Syndiware still has its rough edges and bugs. Somewhere in those remnants lies something important... something the Syndicate didn't intend for anyone to recover.
-
-Follow the traces of the intrusion, work out the Syndicate’s techniques, and reveal the concealed Syndiware relic they attempted to hide.
-
-File: [syndicate_locker.zip](https://github.com/h011o/madhav_phase2/blob/main/files/syndicate_locker.zip)
+https://kramazon.csd.lol/
 
 ## Solve
 
-Provided zip-file has a memory dump along with the encryption script used. Another folder called encryption_files has all the data in its encrypted format ending with `.enc`
+Provided is an amazon-like website where orders can be placed. I first tried clicking around to find different endpoints and found that orders could be placed for the Advent calender. Our goal (as stated by the description) is to find a way to change the priority order. 
+
+These were the requests that were sent while creating an order: 
+
+<img width="686" height="70" alt="image" src="https://github.com/user-attachments/assets/17465c63-a475-4c9b-ba63-c91662f2322a" />
+
+Each of the requests had a request header called `Priority: u= 1, i` which I tried modifying with different values only to keep getting `priority":false` as the response. Then upon inspecting the source code I found `script.js` with the following part which I found interesting:
+
+```javascript
+ const createRes = await fetch("/create-order", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+    });
+    const order = await createRes.json();
+
+    console.log("[*] Waiting for status callback...");
+    setTimeout(async () => {
+      const callbackRes = await fetch(order.callback_url);
+      const status = await callbackRes.json();
+
+      function santaMagic(n) {
+        return n ^ 0x37; // TODO: remove in production
+      }
+
+      if (status.internal.user === 1) {
+        alert("Welcome, Santa! Allowing priority finalize...");
+      }
+
+      setTimeout(async () => {
+        const finalizeRes = await fetch("/finalize", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            user: status.internal.user,
+            order: order.order_id,
+          }),
+        });
+```
+
+This means that setting the value for `user` to `1` would be our next step. Also on looking at the `/finalize` request we can see the cookie `Cookie: auth=BA4FBg%3D%3D`, I used a base64 decoder at first to understand what this means but I got no meaningful value. 
+
+The hint for this challenge states that:
+```
+There is a Set-Cookie header being sent when you request the homepage. Perhaps the server is not verifying this part of the authentication flow properly.
+
+Using any clues that you can find in script.js (do any parts of the code look off?), can you reverse engineer the cookie and send one that can exploit the challenge?
+```
+
+I then noticed the `santaMagic` function and realized that was a XOR involved. 
+
+
+
