@@ -18,6 +18,10 @@ Flag : `csd{Elf67_snowball}`
 
 ***
 
+# Web Exploitation
+
+***
+
 ## Kramazon
 
 > Description
@@ -68,7 +72,7 @@ Each of the requests had a request header called `Priority: u= 1, i` which I tri
         });
 ```
 
-This means that setting the value for `user` to `1` would be our next step. Also on looking at the `/finalize` request we can see the cookie `Cookie: auth=BA4FBg%3D%3D`, I used a base64 decoder at first to understand what this means but I got no meaningful value. 
+This means that setting the value for `user` to `1` would be our next step. Also on looking at the `/finalize` request we can see the cookie value ` auth=BA4FBg%3D%3D` provides us with the response `"message":"Order 64c77513 finalized for user 3921.",`.
 
 The hint for this challenge states that:
 ```
@@ -77,7 +81,18 @@ There is a Set-Cookie header being sent when you request the homepage. Perhaps t
 Using any clues that you can find in script.js (do any parts of the code look off?), can you reverse engineer the cookie and send one that can exploit the challenge?
 ```
 
-I then noticed the `santaMagic` function and realized that was a XOR involved. 
+I then noticed the `santaMagic` function and realized that it used XOR encoding. I then tried using a web base64 to ascii decoder to decode the value of the cookie `auth:BA4FBg==` only to get some white boxes. After this I tried using cyberchef and converted the value to hex to get `04 0e 05 06`, stacking this with XOR using the key as 37 gives us our original user `3921`: 
+
+ <img width="927" height="609" alt="image" src="https://github.com/user-attachments/assets/e667879f-9297-4a58-9ba0-928ef0b132ac" />
 
 
+* Now, all I had to do was reverse engineer this to get the output as `Bg==`. THen on intercepting our original cookie with `auth=Bg==` gives us the request: 
 
+ <img width="693" height="172" alt="image" src="https://github.com/user-attachments/assets/31f7e4c3-394b-44bb-aee8-49986a891dcb" />
+
+* Then on heading over to the provided path I was able to find the flag: `csd{npld_async_callback_idor_mastery}`
+
+## Concepts Learned
+
+* Reverse engineering ciphers on CyberChef
+* Identifying and exploiting a different kind of IDOR vulnerability. 
