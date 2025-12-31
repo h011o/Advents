@@ -1,4 +1,4 @@
-<img width="666" height="381" alt="image" src="https://github.com/user-attachments/assets/da108cc7-efdf-4bdf-b33a-7386da07a75b" /># Forensics
+# Forensics
 
 ***
 
